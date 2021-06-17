@@ -55,7 +55,7 @@ public class Handler {
     public void setDisplayScreen(DisplayScreen screen){this.screen=screen;}
 
     public InputState getMenuState (){
-        return (InputState) getGameProperties().menuState;
+        return (InputState) getGameProperties().InputState;
     }
 
     public void changeState(State state){

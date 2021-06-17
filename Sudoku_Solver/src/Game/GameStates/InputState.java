@@ -2,6 +2,7 @@ package Game.GameStates;
 
 import Main.Handler;
 import Sudoku.entities.Block;
+import Extras.Solver;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 public class InputState extends State {
 	
 	public ArrayList<Block> inputBlocks = new ArrayList<>();
+	public Block[][][] solvedBlocks= new Block[3][3][9];//a 3d array that stores 9 (every grid) 2d arrays (3 by 3, every pos)
 	//right and left exceptions are for the movement of the selector in the grid (fully initialized in the constructor)
 	public ArrayList<Integer> rightExceptions = new ArrayList<>();
 	public ArrayList<Integer> leftExceptions = new ArrayList<>();
@@ -122,6 +124,13 @@ public class InputState extends State {
         	}
     	}
     	
+    	
+    	//moves to solving state
+    	if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ENTER)) {
+    		
+    		solvedBlocks = Solver.solve(inputBlocks);
+    	}
+    	
     }
 
     
@@ -203,8 +212,7 @@ public class InputState extends State {
     		indexInArrayList++;
     	}
     }
-
-
+    
     @Override
     public void refresh() {
     }

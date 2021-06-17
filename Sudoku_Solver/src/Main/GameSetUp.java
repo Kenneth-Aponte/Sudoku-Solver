@@ -32,7 +32,7 @@ public class GameSetUp implements Runnable {
     private Handler handler;
 
     //States
-    public State menuState;
+    public State InputState;
 
     GameSetUp(String title, int width, int height){
 
@@ -57,15 +57,15 @@ public class GameSetUp implements Runnable {
         handler = new Handler(this);
         handler.setDisplayScreen(display);
 
-        menuState = new InputState(handler);
+        InputState = new InputState(handler);
 
-        handler.changeState(menuState);
+        handler.changeState(InputState);
     }
 
 
     public void reStart(boolean clearScore){
-        menuState = new InputState(handler);
-        handler.changeState(menuState);
+        InputState = new InputState(handler);
+        handler.changeState(InputState);
 
     }
 

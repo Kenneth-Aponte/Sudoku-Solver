@@ -3,6 +3,7 @@ package Sudoku.entities;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 import Main.Handler;
 
@@ -11,6 +12,7 @@ public class Block {
 	public Handler handler;
 	public int x,y,width,height;
 	public int value = 0;
+	public ArrayList<Integer> posSolutions = new ArrayList<>();
 	
 	public Block(int x, int y, Handler handler) {
 		this.x = x;
@@ -18,6 +20,10 @@ public class Block {
 		width = handler.getHeight()/18;
 		height = width;
 		this.handler = handler;
+		
+		for(int i = 1;i <= 9; i++) {
+			posSolutions.add(i);
+		}
 	}
 	
 	public void tick() {

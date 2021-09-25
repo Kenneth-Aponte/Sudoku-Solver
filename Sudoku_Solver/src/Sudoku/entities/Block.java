@@ -12,6 +12,7 @@ public class Block {
 	public Handler handler;
 	public int x,y,width,height;
 	public int value = 0;
+	public int currValue = 0;
 	public ArrayList<Integer> posSolutions = new ArrayList<>();
 	
 	public Block(int x, int y, Handler handler) {

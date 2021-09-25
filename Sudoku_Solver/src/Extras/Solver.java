@@ -8,7 +8,7 @@ import Sudoku.entities.*;
 public class Solver {
 	static Block[][][] numBlocks;
 	public static boolean solved = false, done = false;//once done is true, no more solutions can be found with algs and will have to rely on trying every possibility.
-	
+	public static ArrayList<Block> numBlocks1;
 	
 	
 	public static Block[][][] solve(ArrayList<Block> blocksToSolve) {
@@ -27,7 +27,7 @@ public class Solver {
 			}
 			done = true;
 		}
-		//TODO try every pos solution
+//		findAllSolutionsLeft(blocksToSolve);//since they point at the same instances, we can use the original blocksToSolve for this
 		solved = true;
 		return numBlocks;
 	}
@@ -162,7 +162,7 @@ public class Solver {
 	 */
 	public static boolean findNumbersAloneInGrid() {
 		boolean foundOne = false;
-		for(int g = 0; g < 9;g++) {
+		for(int g = 0; g < 9; g++) {
 			HashMap<Integer, Integer> nums = new HashMap<>();
 			for(int i = 1;i<=9;i++) {
 				nums.put(i, 0);
@@ -181,8 +181,7 @@ public class Solver {
 						for(int x = 0; x < 3; x++) {
 							if(numBlocks[x][y][g].posSolutions.contains(key)) {
 								numBlocks[x][y][g].value = key;
-								foundOne = true;
-							}
+								foundOne = true;							}
 						}
 					}
 				}
@@ -191,7 +190,28 @@ public class Solver {
 		return foundOne;
 	}
 	
-	//changes from an ArrayList to a 3DArray as its easier to work with
+
+	//after all the other processes are done, he will try with every posible solution left
+	public static void findAllSolutionsLeft(ArrayList<Block> blocks) {
+		for(int i = 0; i < 81; i++) {
+			Block main = blocks.get(i);
+			if(main.value != 0){
+				continue;
+			}
+			System.out.println(System.currentTimeMillis());
+			for(Integer posSol: main.posSolutions) {
+				main.currValue = posSol;
+				for(int j = 0; j < 81; j++) {
+					
+				}
+			}
+			
+		}
+		System.out.println("finished");
+	}
+
+	
+	//changes from an ArrayList to a 3DArray as its easier to work with for frequencies and other things
 	public static Block[][][] getInputBlocksAs3DArray(ArrayList<Block> inputBlocks) {
 		Block[][][] numBlocks = new Block[3][3][9];
 		int x = 0;

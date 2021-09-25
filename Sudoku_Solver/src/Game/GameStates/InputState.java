@@ -56,7 +56,7 @@ public class InputState extends State {
     	
     	
     	//adjusting the value on the block (redundant though it's the most efficient way without using buttons or a text box of some sort)
-    	int valueToAdd = 0;
+    	int valueToAdd = -1;
     	if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_1) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_NUMPAD1)) {
     		valueToAdd=1;
     	}
@@ -84,10 +84,13 @@ public class InputState extends State {
     	else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_9) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_NUMPAD9)) {
     		valueToAdd=9;
     	}
+    	else if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_0) || handler.getKeyManager().keyJustPressed(KeyEvent.VK_NUMPAD0)) {
+    		valueToAdd=0;
+    	}
     	
     	
     	//adds the value, if input was received
-    	if(valueToAdd > 0 && selectedBlock != null) {
+    	if(valueToAdd >= 0 && selectedBlock != null) {
     		selectedBlock.addInput(valueToAdd);
     	}
     	

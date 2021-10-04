@@ -14,8 +14,9 @@ public class Solver {
 	public static Block[][][] solve(ArrayList<Block> blocksToSolve) {
 		
 		/*
-		 * essentially what we're going to do is, look at all the possibilities for a given sudoku square(there are 81 of them), after that
-		 * we will solve for squares that contain only one pos solution and numbers that have a frequency of one per grid, then we will test out each and every solution, the one that follows the sudoku rules is the one given back to the user.
+		 * Essentially what we're going to do is, look at all the possibilities for a given sudoku square(there are 81 of them), after that
+		 * we will solve for squares that contain only one pos solution and numbers that have a frequency of one per grid.
+		 * More algorithms can then be added to solve the rest...
 		 *  
 		 */
 		numBlocks = getInputBlocksAs3DArray(blocksToSolve);
@@ -27,7 +28,7 @@ public class Solver {
 			}
 			done = true;
 		}
-//		findAllSolutionsLeft(blocksToSolve);//since they point at the same instances, we can use the original blocksToSolve for this
+
 		solved = true;
 		return numBlocks;
 	}
@@ -43,6 +44,7 @@ public class Solver {
 		}
 		
 	}
+	
 	
 	//adjusts the solutions for a single square
 	public static void findPosSolutionsFor(Block targetBlock, int g, int targetX, int targetY) {
@@ -97,6 +99,7 @@ public class Solver {
 		
 	}
 	
+	
 	//removes numbers that are in the same vertical line for a given block as these can't be a solution
 	public static void removeVertically(Block targetBlock, int g, int targetX, int targetY) {
 		int x = targetX;
@@ -129,6 +132,7 @@ public class Solver {
 		
 	}
 	
+	
 	//removes numbers that are in the same grid for a given block as these can't be a solution
 	public static void removeFromSameGrid(Block targetBlock, int g, int targetX, int targetY) {
 		for(int x = 0; x < 3; x++) {
@@ -139,6 +143,7 @@ public class Solver {
 			}
 		}
 	}
+	
 	
 	//finds blocks which only have a single pos solution-- that is the solution for the given block
 	public static boolean findNumbersWithOnlyOnePosSol() {
@@ -190,26 +195,6 @@ public class Solver {
 		return foundOne;
 	}
 	
-
-	//after all the other processes are done, he will try with every posible solution left
-	public static void findAllSolutionsLeft(ArrayList<Block> blocks) {
-		for(int i = 0; i < 81; i++) {
-			Block main = blocks.get(i);
-			if(main.value != 0){
-				continue;
-			}
-			System.out.println(System.currentTimeMillis());
-			for(Integer posSol: main.posSolutions) {
-				main.currValue = posSol;
-				for(int j = 0; j < 81; j++) {
-					
-				}
-			}
-			
-		}
-		System.out.println("finished");
-	}
-
 	
 	//changes from an ArrayList to a 3DArray as its easier to work with for frequencies and other things
 	public static Block[][][] getInputBlocksAs3DArray(ArrayList<Block> inputBlocks) {
